@@ -10,8 +10,10 @@ handlers:
   upload: favicon\.ico
 
 - url: .*
-  script: src\handlers\main.asksnoop_app
+  script: main.asksnoop
 
 libraries:
 - name: webapp2
   version: "2.5.2"
+- name: jinja2
+  version: latest

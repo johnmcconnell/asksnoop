@@ -7,8 +7,8 @@
 <body>
 {% autoescape true %}
 	<h3>Ask Snoop</h3>
-	<form action="freebase" method="post">
-		<label>Freebase query:<input type="text"></input></label>
+	<form action="query" method="post">
+		<label>Freebase query:<input name="query" type="text"></input></label>
 		<input type="submit" value="search"></input>	
 	</form>
 {% endautoescape %}

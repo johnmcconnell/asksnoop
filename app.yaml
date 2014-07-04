@@ -9,6 +9,17 @@ handlers:
   static_files: favicon.ico
   upload: favicon\.ico
 
+- url: /css
+  static_dir: assets/style
+  mime_type: text/css
+
+- url: /js
+  static_dir: assets/scripts
+  mime_type: application/javascript
+
+- url: /fonts
+  static_dir: assets/fonts
+
 - url: .*
   script: main.asksnoop
 

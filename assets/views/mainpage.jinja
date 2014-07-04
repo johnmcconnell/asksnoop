@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
 	<title>Ask Snoop</title>
 </head>
 <body>
 {% autoescape true %}
 	<h3>Ask Snoop</h3>
-	<p>Which url would you like me to verify?</p>
+	<form action="freebase" method="post">
+		<label>Freebase query:<input type="text"></input></label>
+		<input type="submit" value="search"></input>	
+	</form>
 {% endautoescape %}
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
 </body>
 </html>

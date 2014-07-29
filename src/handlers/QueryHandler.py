@@ -14,6 +14,6 @@ class Handler(webapp2.RequestHandler):
     def post(self):
 	self.response.headers['Content-Type'] = 'text/html'
 	query_str = self.request.get('query')
-	freebase.query(query_str)
+	json = freebase.query(query_str)
 	template = JINJA_ENVIRONMENT.get_template('query.jinja')
-	self.response.write(template.render({})) 
+	self.response.write(template.render({'content':json})) 

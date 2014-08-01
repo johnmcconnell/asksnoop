@@ -14,6 +14,6 @@ class Handler(webapp2.RequestHandler):
     def post(self):
 	self.response.headers['Content-Type'] = 'text/html'
 	query_str = self.request.get('query')
-	json = freebase.query(query_str)
+	topic = freebase.most_likely_topic(query_str)
 	template = JINJA_ENVIRONMENT.get_template('query.jinja')
-	self.response.write(template.render({'content':json})) 
+	self.response.write(template.render({'topic':topic, 'topic_id':topic['mid']})) 

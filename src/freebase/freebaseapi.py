@@ -27,7 +27,7 @@ def json_from_url(url):
 	request = urllib2.urlopen(url)
 	return json.loads(request.read())
 
-def get_topic(topic_id):
+def get_full_topic(topic_id):
 	params = {'key':api_key, 'filter':'commons'}
 	url = encoded_url(api_urls['topic'] + topic_id, params)
 	logging.info(url)

@@ -38,7 +38,7 @@ def check(text):
 		if "NN" in i[1]:
 			pieces.append(i[0])
 	print pieces
-	return pieces
+	return " ".join(pieces)
 	
 
 

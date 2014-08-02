@@ -21,52 +21,35 @@ scan page and evaluate relevance/correctness to terms
 
 
 """
-#text
-def check():
-	text = "TIL the Fibonacci Sequence was described by an Indian mathematician ~1200 years before Fibonacci wrote of it"
+def check(text):
 	#get text(eventually from reddit post titles)
 
 	#Tokenize
 	tokens = word_tokenize(text)
-	print "\ntokenization of text:\n",tokens
+	#print "\ntokenization of text:\n",tokens
 	#POS tagging
 	tags = pos_tag(tokens)
 	print "\nPOS-Tagging:\n",tags
 	#Chunking
-	chunks = chunk.ne_chunk(tags)
-	print "\nchunking:\n", chunks
+	#chunks = chunk.ne_chunk(tags)
+	#print "\nchunking:\n", chunks
 	pieces = []
-	#for i in tags:
-	#	if "NN" in i[1]:
-	#		pieces.append(i[0])
-	#print pieces
-	#return pieces
-	
-	query = []
-	os.popen("echo '"+text+"' > ~/stanfordtemp.txt")
-	parser_out = os.popen("~/asksnoop/src/stanford-parser-2012-11-12/lexparser.sh ~/stanfordtemp.txt").readlines()
-	#print parser_out
-	for parse in parser_out:
-		if " " in parse:
-			print parse
-			for word in tokens:
-				if word in parse:
-					query.append(word)
-			#for char in parse:
-	print query
-	#bracketed_parse = " ".join( [i.strip() for i in parser_out if i.strip()[0] == "("] )
-	#print bracketed_parse
+	for i in tags:
+		if "NN" in i[1]:
+			pieces.append(i[0])
+	print pieces
+	return " ".join(pieces)
 	
 
 
 #string holding the fact query we want to check
-"""query = ""
+query = ""
 
 for i in range(len(sys.argv)):
 	query = sys.argv[i]
 
-check(query)"""
-check()
+check(query)
+
 """
 Notes:
 Penn Treebank seems to have a good POS Tag set (used above) and Stanford uses parts of it for its' parser.

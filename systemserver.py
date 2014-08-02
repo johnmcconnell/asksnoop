@@ -1,6 +1,7 @@
 import sys
 import BaseHTTPServer
 import cgi
+import src.factcheck as fc
 from urlparse import urlparse, parse_qs
 from SimpleHTTPServer import SimpleHTTPRequestHandler
 
@@ -15,8 +16,8 @@ class NLTKHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         s.send_header("Content-type", "application/json")
         s.end_headers()
 	params = parse_qs(urlparse(s.path).query)
-	
-	s.wfile.write("{score:" + str(30) + "}")
+	phrase = fc.check(params['query'][0])
+	s.wfile.write(phrase)
 
 HandlerClass = NLTKHandler
 ServerClass  = BaseHTTPServer.HTTPServer

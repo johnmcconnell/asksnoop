@@ -21,28 +21,33 @@ scan page and evaluate relevance/correctness to terms
 
 
 """
-
-def check():
+def check(text):
 	#get text(eventually from reddit post titles)
 	#text = statement
 	
 	
-	text = "the declaration of indepenedence was signed in 1776"
+	fact = text
 	#Capitalization matters in distinguishing from nouns/verbs
 	#text = text.lower()
 
 	#Tokenize
 	tokens = word_tokenize(text)
-	print "\ntokenization of text:\n",tokens
+	#print "\ntokenization of text:\n",tokens
 	#POS tagging
 	tags = pos_tag(tokens)
-	print "\nPOS-Tagging:\n",tags
+	#print "\nPOS-Tagging:\n",tags
 	#Chunking
 	chunks = chunk.ne_chunk(tags)
 	print "\nchunking:\n", chunks
 	
 	grammar = data.load('grammars/large_grammars/atis.cfg')
 
+#string holding the fact query we want to check
+query = ""
+for i in range(len(sys.argv)):
+	query = sys.argv[i]
+
+check(query)
 
 """
 Notes:
@@ -70,37 +75,6 @@ http://www.nltk.org/index.html
 PDF Book
 http://www.nltk.org/book/
 
-
 """
-###below code from http://streamhacker.com/2008/12/29/how-to-train-a-nltk-chunker/ (doesn't seem to work properly)
-	print conll_tag_chunks(tags)
-import nltk.chunk
- 	
-def conll_tag_chunks(chunk_sents):
-    tag_sents = [nltk.chunk.tree2conlltags(tree) for tree in chunk_sents]
-    return [[(t, c) for (w, t, c) in chunk_tags] for chunk_tags in tag_sents]
-	
-import nltk.corpus, nltk.tag
- 
-def ubt_conll_chunk_accuracy(train_sents, test_sents):
-    train_chunks = conll_tag_chunks(train_sents)
-    test_chunks = conll_tag_chunks(test_sents)
- 
-    u_chunker = nltk.tag.UnigramTagger(train_chunks)
-    print 'u:', nltk.tag.accuracy(u_chunker, test_chunks)
- 
-    ub_chunker = nltk.tag.BigramTagger(train_chunks, backoff=u_chunker)
-    print 'ub:', nltk.tag.accuracy(ub_chunker, test_chunks)
- 
-    ubt_chunker = nltk.tag.TrigramTagger(train_chunks, backoff=ub_chunker)
-    print 'ubt:', nltk.tag.accuracy(ubt_chunker, test_chunks)
- 
-    ut_chunker = nltk.tag.TrigramTagger(train_chunks, backoff=u_chunker)
-    print 'ut:', nltk.tag.accuracy(ut_chunker, test_chunks)
- 
-    utb_chunker = nltk.tag.BigramTagger(train_chunks, backoff=ut_chunker)
-    print 'utb:', nltk.tag.accuracy(utb_chunker, test_chunks)
- 
 
-check()
 	

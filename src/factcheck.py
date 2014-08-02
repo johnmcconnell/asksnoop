@@ -23,27 +23,28 @@ scan page and evaluate relevance/correctness to terms
 """
 def check(text):
 	#get text(eventually from reddit post titles)
-	#text = statement
-	
-	
-	fact = text
-	#Capitalization matters in distinguishing from nouns/verbs
-	#text = text.lower()
 
 	#Tokenize
 	tokens = word_tokenize(text)
 	#print "\ntokenization of text:\n",tokens
 	#POS tagging
 	tags = pos_tag(tokens)
-	#print "\nPOS-Tagging:\n",tags
+	print "\nPOS-Tagging:\n",tags
 	#Chunking
-	chunks = chunk.ne_chunk(tags)
-	print "\nchunking:\n", chunks
+	#chunks = chunk.ne_chunk(tags)
+	#print "\nchunking:\n", chunks
+	pieces = []
+	for i in tags:
+		if "NN" in i[1]:
+			pieces.append(i[0])
+	print pieces
+	return pieces
 	
-	grammar = data.load('grammars/large_grammars/atis.cfg')
+
 
 #string holding the fact query we want to check
 query = ""
+
 for i in range(len(sys.argv)):
 	query = sys.argv[i]
 

@@ -6,7 +6,7 @@ import math
 
 def okapi(query, document):
     k1 = 1.5
-    k3 = 500 
+    k3 = 1000
     b = 0.5
 
     q_words = query.split()
@@ -53,6 +53,7 @@ def okapi(query, document):
         second = ((k1 + 1) * cwds[word])/(k1 * (1 - b + (b * (n / n_avg))) + cwds[word])
         third = ((k3 + 1) * cwqs[word])/(k3 + cwqs[word])
 
+        print first * second * third
         summation += first * second * third
 
     return summation

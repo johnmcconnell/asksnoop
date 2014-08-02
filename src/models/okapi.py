@@ -1,8 +1,8 @@
 # query = sentence to be validated
 # document = something established to be true
 
-from sets import Set
 import math
+import helper
 
 def okapi(query, document):
     k1 = 1.5
@@ -13,8 +13,8 @@ def okapi(query, document):
     n = len(document)
     n_avg = n
 
-    cwds = get_word_count(document)
-    cwqs = get_word_count(query)
+    cwds = helper.get_word_count(document)
+    cwqs = helper.get_word_count(query)
 
     summation = 0
     for word in query:
@@ -33,15 +33,6 @@ def okapi(query, document):
         summation += first * second * third
 
     return summation
-
-def get_word_count(text):
-	counts = {}
-	for word in text:
-		if counts.has_key(word):
-			counts[word] += 1
-		else:
-			counts[word] = 1
-	return counts
 
 print okapi('This is a completely factual statement'.split(),
 	'This is another completely factual statement'.split())

@@ -63,5 +63,3 @@ STOPWORDS = ["a", "about", "above", "according",
             "whosoever", "why", "will", "wilt", "with", "within", "without",
             "worse", "worst", "would", "wow", "ye", "yet", "year", "yippee",
             "you", "your", "yours", "yourself", "yourselves" ]
-
-print STOPWORDS[-1]

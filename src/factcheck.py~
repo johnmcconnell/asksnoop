@@ -47,7 +47,7 @@ def check(text):
 			start = True
 			pieces.append(i[0])
 		
-	print ".".join(pieces)
+	print " ".join(pieces)
 	return " ".join(pieces)
 	
 	"""query = []
@@ -77,13 +77,13 @@ def check(text):
 
 
 #string holding the fact query we want to check
-query = ""
+#query = ""
 
-for i in range(len(sys.argv)):
+#for i in range(len(sys.argv)):
 	query = sys.argv[i]
 
-query = "TIL the Fibonacci Sequence was described by an Indian mathematician ~1200 years before Fibonacci wrote of it"
-check(query)
+#query = "TIL George Washington was a Physicist"
+#check(query)
 """
 Notes:
 Penn Treebank seems to have a good POS Tag set (used above) and Stanford uses parts of it for its' parser.

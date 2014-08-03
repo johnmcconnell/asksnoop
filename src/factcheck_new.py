@@ -66,7 +66,7 @@ def remove_tags(parse_branch):
 	return words
 #text
 def check(text):
-	text = "TIL the Fibonacci Sequence was described by an Indian mathematician ~1200 years before Fibonacci wrote of it"
+	#text = "TIL the Fibonacci Sequence was described by an Indian mathematician ~1200 years before Fibonacci wrote of it"
 	#text = "TIL George Washington was a Physicist"
 	text = text.replace("TIL","")
 	
@@ -101,7 +101,7 @@ def check(text):
 	#query = sys.argv[i]
 
 #query = "TIL George Washington was a Physicist"
-check("test")
+#check("test")
 """
 Notes:
 Penn Treebank seems to have a good POS Tag set (used above) and Stanford uses parts of it for its' parser.

@@ -69,13 +69,12 @@ def check(text):
 
 
 #string holding the fact query we want to check
-"""query = ""
+query = ""
 
 for i in range(len(sys.argv)):
 	query = sys.argv[i]
 
-check(query)"""
-check()
+check(query)
 """
 Notes:
 Penn Treebank seems to have a good POS Tag set (used above) and Stanford uses parts of it for its' parser.

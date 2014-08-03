@@ -1,6 +1,7 @@
 import os
 
 import src.freebase.FreebaseAPI as freebase
+import src.Validator as validator
 
 import jinja2
 import webapp2
@@ -14,10 +15,8 @@ class Handler(webapp2.RequestHandler):
     def post(self):
 	self.response.headers['Content-Type'] = 'text/html'
 	query_str = self.request.get('query')
-	qtopic = freebase.most_likely_topic(query_str)
-	topic = freebase.get_full_topic(qtopic['mid'])
-	brief = freebase.topic_summary(topic)
-	template = JINJA_ENVIRONMENT.get_template('query.jinja')
+	score = validator.score(query_str)
+	template = JINJA_ENVIRONMENT.get_template('truth.jinja')
 	self.response.write(template.render(
-		{'topic':qtopic, 'topic_id':qtopic['mid'], 
-		'info':topic, 'brief':brief})) 
+		{'topic':query_str, 'score':score}))
+

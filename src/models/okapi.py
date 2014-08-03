@@ -1,62 +1,42 @@
 # query = sentence to be validated
 # document = something established to be true
 
-from sets import Set
 import math
+import helper
 
 def okapi(query, document):
     k1 = 1.5
-    k3 = 1000
-    b = 0.5
-
-    q_words = query.split()
-    d_words = document.split()
+    k3 = 300
+    b = 0.2
 
     N = 1
-    n = len(d_words)
+    n = len(document)
     n_avg = n
 
-    cwds = {}
-    for word in d_words:
-        if cwds.has_key(word):
-            cwds[word] += 1;
-        else:
-            cwds[word] = 1
-
-    for word in q_words:
-        if word not in d_words:
-            cwds[word] = 0
-
-    cwqs = {}
-    for word in q_words:
-        if cwqs.has_key(word):
-            cwqs[word] += 1;
-        else:
-            cwqs[word] = 1       
-
-    for word in d_words:
-        if word not in q_words:
-            cwqs[word] = 0
-
-    union_words = set(q_words)
-    union_words.update(d_words)
+    cwds = helper.get_word_count(document)
+    cwqs = helper.get_word_count(query)
 
     summation = 0
-
-    for word in union_words:
-        if word in d_words:
+    for word in query:
+        if word in document:
             df = 1
+	    doc_count = cwds[word]
         else:
             df = 0
+	    doc_count = 0
+	query_count = 1
 
-        first = math.log((N - df + 0.5)/(df + 0.5))
-        second = ((k1 + 1) * cwds[word])/(k1 * (1 - b + (b * (n / n_avg))) + cwds[word])
-        third = ((k3 + 1) * cwqs[word])/(k3 + cwqs[word])
+        first = 1 #math.log((N - df + 0.5)/(df + 0.5))
+        second = ((k1 + 1) * doc_count)/(k1 * (1 - b + (b * (n / n_avg))) + doc_count)
+        third = ((k3 + 1) * query_count)/(k3 + query_count)
 
-        print first * second * third
         summation += first * second * third
 
     return summation
 
-
-print okapi('hello there bob', 'hello there jim')
+print okapi('This is a completely factual statement'.split(),
+	'This is another completely factual statement'.split())
+print okapi('I found a dog near the park'.split(),
+	'This is another completely factual statement'.split())
+print okapi('completely factual'.split(),
+	'This is another completely factual statement'.split())

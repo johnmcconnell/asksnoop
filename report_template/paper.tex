@@ -1,0 +1,76 @@
+% CS 410 Summer 2014 LaTeX template, based off of
+% http://www.acm.org/sigs/publications/proceedings-templates
+
+\documentclass{acm} % this finds the file "acm.bst"
+
+\usepackage{cite,graphicx}
+
+% this lets you include clickable URLs with \url{}
+\usepackage[hidelinks]{hyperref}
+
+\begin{document}\sloppy % sloppy necessary here
+
+\title{Super Awesome Title for your Project
+    \titlenote{Submitted as the final project for CS 410 Summer 2014.}
+}
+
+\numberofauthors{2} % make sure you set this number
+\author{%
+    \alignauthor Sarah Dorian \\
+    \affaddr{Department of Computer Science}\\
+    \affaddr{University of Illinois at Urbana-Champaign}\\
+    \email{sdorian22@illinois.edu}
+    \alignauthor Bob Turkleton\\
+    \affaddr{Department of Computer Science}\\
+    \affaddr{University of Illinois at Urbana-Champaign}\\
+    \email{bturks23@illinois.edu}
+}
+\maketitle
+
+\begin{abstract}
+Add your abstract text here.
+\end{abstract}
+
+\keywords{include, some, keywords, if, you, want}
+
+\section{Introduction}
+
+You don't have to follow these section names if you don't want to, but you
+should definitely include an introduction and conclusion.
+
+\section{Related Work}
+
+What similar things are already out there? You can cite things like
+this~\cite{manning-ir-book} and this~\cite{zhai-smoothing}. I got the second
+reference bibtex from \url{http://dl.acm.org/citation.cfm?id=984322}. I just
+simplified the bibtex reference names to ``manning-ir-book'' and
+``zhai-smoothing''. Also, did you notice that URL and citations were clickable?
+
+\section{Experiments}
+
+Did you perform any experiments?
+
+\section{Discussion}
+
+Are there any interesting questions or findings that should be discussed?
+
+\section{Conclusion}
+
+Here's why our project is great, and this is what we told you in the paper.
+
+\section*{Acknowledgments}
+
+The authors would like to thank people for things. You can delete this section
+if you want.
+
+\appendix
+
+\section{Division of Labor (for grading)}
+
+This section is only necessary for the class project, not for the literature
+survey. Sarah did all the work. Bob did nothing.
+
+\bibliographystyle{plain}
+\bibliography{bib} % "bib" is the name of the .bib file
+
+\end{document}

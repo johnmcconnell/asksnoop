@@ -15,9 +15,12 @@
 # limitations under the License.
 #
 import webapp2
-from src.handlers import MainHandler, QueryHandler
+from src.handlers import MainHandler, QueryHandler, NLPInterface, TruthHandler
 
 asksnoop = webapp2.WSGIApplication([
     ('/', MainHandler.Handler),
-    ('/query', QueryHandler.Handler)
+    ('/query', QueryHandler.Handler),
+    ('/nlp', NLPInterface.Handler),
+    ('/valid', TruthHandler.Handler),
 ], debug=True)
+

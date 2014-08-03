@@ -32,19 +32,25 @@ def check(text):
 	tokens = word_tokenize(text)
 	print "\ntokenization of text:\n",tokens
 	#POS tagging
-	#tags = pos_tag(tokens)
-	#print "\nPOS-Tagging:\n",tags
+	tags = pos_tag(tokens)
+	print "\nPOS-Tagging:\n",tags
 	#Chunking
 	#chunks = chunk.ne_chunk(tags)
 	#print "\nchunking:\n", chunks
-	#pieces = []
-	#for i in tags:
-	#	if "NN" in i[1]:
-	#		pieces.append(i[0])
-	#print pieces
-	#return pieces
+	pieces = []
+	start = False
+	for i in tags:
+		if start:
+			if "NN" not in i[1]:
+				break
+		if "NN" in i[1]:
+			start = True
+			pieces.append(i[0])
+		
+	print " ".join(pieces)
+	return " ".join(pieces)
 	
-	query = []
+	"""query = []
 	os.popen("echo '"+text+"' > ~/stanfordtemp.txt")
 	parser_out = os.popen("~/asksnoop/src/stanford-parser-2012-11-12/lexparser.sh ~/stanfordtemp.txt").readlines()
 	#print parser_out
@@ -62,9 +68,11 @@ def check(text):
 		if flag:
 			break
 	print query
+	del query[-1]
+	print "".join(query)
 	return " ".join(query)
 	#bracketed_parse = " ".join( [i.strip() for i in parser_out if i.strip()[0] == "("] )
-	#print bracketed_parse
+	#print bracketed_parse"""
 	
 
 
@@ -74,6 +82,7 @@ query = ""
 for i in range(len(sys.argv)):
 	query = sys.argv[i]
 
+query = "TIL the Fibonacci Sequence was described by an Indian mathematician ~1200 years before Fibonacci wrote of it"
 check(query)
 """
 Notes:

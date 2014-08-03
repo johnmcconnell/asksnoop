@@ -62,6 +62,7 @@ def check():
 		if flag:
 			break
 	print query
+	return " ".join(query)
 	#bracketed_parse = " ".join( [i.strip() for i in parser_out if i.strip()[0] == "("] )
 	#print bracketed_parse
 	

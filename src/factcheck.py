@@ -22,8 +22,8 @@ scan page and evaluate relevance/correctness to terms
 
 """
 #text
-def check():
-	text = "TIL the Fibonacci Sequence was described by an Indian mathematician ~1200 years before Fibonacci wrote of it"
+def check(text):
+	#text = "TIL the Fibonacci Sequence was described by an Indian mathematician ~1200 years before Fibonacci wrote of it"
 	#text = "TIL George Washington was a Physicist"
 	text = text.replace("TIL","")
 	#get text(eventually from reddit post titles)

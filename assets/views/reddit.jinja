@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+	<title>Ask Snoo</title>
+</head>
+<body>
+{% autoescape true %}
+	<div class="jumbotron">
+	<h3>Ask Snoo</h3>
+	{% for result in results %}
+	<p>{{result.title}}={{result.score}}</p>
+	{% endfor %}
+	</div>
+{% endautoescape %}
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+</body>
+</html>

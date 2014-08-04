@@ -28,17 +28,23 @@ def json_from_url(url):
 	return json.loads(request.read())
 
 def get_full_topic(topic_id):
-	params = {'key':api_key, 'filter':'commons'}
-	url = encoded_url(api_urls['topic'] + topic_id, params)
-	logging.info(url)
-	return json_from_url(url)
+	try:
+	    params = {'key':api_key, 'filter':'commons'}
+	    url = encoded_url(api_urls['topic'] + topic_id, params)
+	    logging.info(url)
+	    return json_from_url(url)
+        except:
+	    return None
 
 def topic_summary(topic):
 	desc_key = '/common/topic/description'
-	if topic['property'][desc_key]:
+	try:
+	    if topic['property'][desc_key]:
 		return topic['property'][desc_key]['values'][0]['value']
-	else:
+	    else:
 		return None
+	except:
+	    return None
 
 def pretty_topic_string(topic):
 	buff = ''

@@ -2,6 +2,7 @@ import sys
 import BaseHTTPServer
 import cgi
 import src.factcheck as fc
+import src.reddit.snooit as snooit
 import json
 from urlparse import urlparse, parse_qs
 from SimpleHTTPServer import SimpleHTTPRequestHandler
@@ -16,9 +17,16 @@ class NLTKHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         s.send_response(200)
         s.send_header("Content-type", "application/json")
         s.end_headers()
-	params = parse_qs(urlparse(s.path).query)
-	phrase = fc.check(params['query'][0])
-	s.wfile.write(json.dumps({'topics':phrase}))
+        titles = snooit.get_hot_post_titles('todayilearned',5)
+        s.wfile.write(json.dumps({'titles':titles}))
+    def do_POST(s):
+        """Respond to a GET request."""
+        s.send_response(200)
+        s.send_header("Content-type", "application/json")
+        s.end_headers()
+        params = parse_qs(urlparse(s.path).query)
+        phrase = fc.check(params['query'][0])
+        s.wfile.write(json.dumps({'topics':phrase}))
 
 HandlerClass = NLTKHandler
 ServerClass  = BaseHTTPServer.HTTPServer
@@ -34,7 +42,7 @@ HandlerClass.protocol_version = Protocol
 httpd = ServerClass(server_address, HandlerClass)
 
 sa = httpd.socket.getsockname()
-print "Serving HTTP on", sa[0], "port", sa[1], "..."
+print("Serving HTTP on", sa[0], "port", sa[1], "...")
 httpd.serve_forever()
 
 

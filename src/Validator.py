@@ -15,8 +15,9 @@ def topic(noun):
 def score(query,topics):
     brief = []
     for topic in topics:
-    	raw = freebase.topic_summary(topic).split()
-	brief += helper.get_non_stop_words(raw)
+    	raw = freebase.topic_summary(topic)
+	if raw:
+	    brief += helper.get_non_stop_words(raw.split())
     query = helper.get_non_stop_words(query.split())
     logging.info(brief)
     return okapi.okapi(query,brief)

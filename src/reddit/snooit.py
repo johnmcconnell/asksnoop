@@ -34,7 +34,7 @@ def get_hot_post_titles(subreddit, limit):
     # skip the welcome post
     next(hots)
 
+    titles = []
     for hot in hots:
-        print hot.title + '\n'
-
-get_hot_post_titles(TIL, 10)
+	titles.append(hot.title)
+    return titles

@@ -21,60 +21,76 @@ scan page and evaluate relevance/correctness to terms
 
 
 """
+def remove_tags(parse_branch):
+	words = parse_branch.replace("(CC","")
+	words = words.replace("(CD","")
+	words = words.replace("(DT","")
+	words = words.replace("(EX","")
+	words = words.replace("(FW","")
+	words = words.replace("(IN","")
+	words = words.replace("(JJR","")
+	words = words.replace("(JJS","")
+	words = words.replace("(JJ","")
+	words = words.replace("(LS","")
+	words = words.replace("(MD","")
+	words = words.replace("(NNPS","")
+	words = words.replace("(NNS","")
+	words = words.replace("(NNP","")
+	words = words.replace("(NP","")
+	words = words.replace("(NN","")
+	words = words.replace("(PDT","")
+	words = words.replace("(POS","")
+	words = words.replace("(PRP$","")
+	words = words.replace("(PRP","")
+	words = words.replace("(P","")
+	words = words.replace("(RB","")
+	words = words.replace("(RBR","")
+	words = words.replace("(RBS","")
+	words = words.replace("(RP","")
+	words = words.replace("(SYM","")
+	words = words.replace("(TO","")
+	words = words.replace("(UH","")
+	words = words.replace("(VBD","")
+	words = words.replace("(VBG","")
+	words = words.replace("(VBN","")
+	words = words.replace("(VBP","")
+	words = words.replace("(VBZ","")
+	words = words.replace("(VB","")
+	words = words.replace("(WDT","")
+	words = words.replace("(WP$","")
+	words = words.replace("(WP","")
+	words = words.replace("(WRB","")
+	words = words.replace("\n","")
+	words = words.replace("   ","")
+	words = words.replace(")","")
+	return words
 #text
 def check(text):
 	#text = "TIL the Fibonacci Sequence was described by an Indian mathematician ~1200 years before Fibonacci wrote of it"
 	#text = "TIL George Washington was a Physicist"
 	text = text.replace("TIL","")
-	#get text(eventually from reddit post titles)
-
-	#Tokenize
-	tokens = word_tokenize(text)
-	print "\ntokenization of text:\n",tokens
-	#POS tagging
-	tags = pos_tag(tokens)
-	print "\nPOS-Tagging:\n",tags
-	#Chunking
-	#chunks = chunk.ne_chunk(tags)
-	#print "\nchunking:\n", chunks
-	phrases = []
-	phrase = []
-	start = False
-	for i in tags:
-		if start:
-			if "NN" not in i[1]:
-				phrases.append(" ".join(phrase))
-				phrase = []
-				start = False
-		if "NN" in i[1]:
-			start = True
-			phrase.append(i[0])
-		
-	return phrases
 	
-	"""query = []
+	query = []
 	os.popen("echo '"+text+"' > ~/stanfordtemp.txt")
 	parser_out = os.popen("~/asksnoop/src/stanford-parser-2012-11-12/lexparser.sh ~/stanfordtemp.txt").readlines()
-	#print parser_out
-	flag = False
+	print "Parsing text:'",text,"'\n"
+	print type(parser_out)
 	for parse in parser_out:
 		print parse
-	print "Filter out only Noun Phrase"
+	
+
+	print "Filtering out only Noun Phrase"
+	phrases = []
 	for parse in parser_out:
 		if "NP" in parse:
-			print parse
-			for word in tokens:
-				if word in parse:
-					query.append(word)
-					flag = True
-		if flag:
-			break
-	print query
-	del query[-1]
-	print "".join(query)
-	return " ".join(query)
-	#bracketed_parse = " ".join( [i.strip() for i in parser_out if i.strip()[0] == "("] )
-	#print bracketed_parse"""
+			print "original",parse
+			phrase = remove_tags(parse)
+			print "cleaned phrase:",phrase,"\n"
+			phrases.append(phrase)
+
+	print phrases
+	return phrases
+	
 	
 
 
@@ -85,7 +101,7 @@ def check(text):
 	#query = sys.argv[i]
 
 #query = "TIL George Washington was a Physicist"
-#check(query)
+#check("test")
 """
 Notes:
 Penn Treebank seems to have a good POS Tag set (used above) and Stanford uses parts of it for its' parser.

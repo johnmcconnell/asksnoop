@@ -15,11 +15,16 @@ class Handler(webapp2.RequestHandler):
     def post(self):
 	self.response.headers['Content-Type'] = 'text/html'
 	query_str = self.request.get('query')
-	noun = validator.noun(query_str)
-	topic,name = validator.topic(noun)
-	score = validator.score(query_str,topic)
+	nouns = validator.nouns(query_str)
+	topics = []
+	names = []
+	for noun in nouns:
+	    topic,name = validator.topic(noun)
+	    topics.append(topic)
+	    names.append(name)
+	score = validator.score(query_str, topics)
 	template = JINJA_ENVIRONMENT.get_template('truth.jinja')
 	self.response.write(template.render(
-		{'query':query_str, 'topic':name, 
-			'score':score, 'noun':noun}))
+		{'query':query_str, 'topics':names, 
+			'score':score, 'nouns':nouns}))
 

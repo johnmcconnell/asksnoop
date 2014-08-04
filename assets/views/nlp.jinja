@@ -6,10 +6,12 @@
 </head>
 <body>
 {% autoescape true %}
+<div class="jumbotron">
 	<h3>Sentence</h3>
 	<p>{{sentence}}</p>
 	<h3>Noun Phrase</h3>
-	<p>{{phrase}}</p>
+	<p>{% for phrase in phrases %} {{phrase}}, {% endfor %}</p>
+</div>
 {% endautoescape %}
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.js"></script>

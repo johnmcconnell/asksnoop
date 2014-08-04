@@ -6,14 +6,16 @@
 </head>
 <body>
 {% autoescape true %}
+<div class="jumbotron">
 	<h3>Query</h3>
 	<p>{{query}}</p>
 	<h3>Topic</h3>
-	<p>{{topic}}</p>
+	<p>{% for topic in topics %}{{topic}}, {% endfor %}</p>
 	<h3>Noun</h3>
-	<p>{{noun}}</p>
+	<p>{% for noun in nouns %}{{noun}}, {% endfor %}</p>
 	<h3>Score</h3>
 	<p>{{score}}<p>
+</div>
 {% endautoescape %}
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.js"></script>

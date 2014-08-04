@@ -37,18 +37,20 @@ def check(text):
 	#Chunking
 	#chunks = chunk.ne_chunk(tags)
 	#print "\nchunking:\n", chunks
-	pieces = []
+	phrases = []
+	phrase = []
 	start = False
 	for i in tags:
 		if start:
 			if "NN" not in i[1]:
-				break
+				phrases.append(" ".join(phrase))
+				phrase = []
+				start = False
 		if "NN" in i[1]:
 			start = True
-			pieces.append(i[0])
+			phrase.append(i[0])
 		
-	print " ".join(pieces)
-	return " ".join(pieces)
+	return phrases
 	
 	"""query = []
 	os.popen("echo '"+text+"' > ~/stanfordtemp.txt")

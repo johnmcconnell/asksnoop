@@ -6,7 +6,8 @@
 </head>
 <body>
 {% autoescape true %}
-	<h3>Ask Snoop</h3>
+	<div class="jumbotron">
+	<h3>Ask Snoo</h3>
 	<form action="query" method="post">
 		<label>Freebase query:<input name="query" type="text"></input></label>
 		<input type="submit" value="search"></input>	
@@ -19,6 +20,7 @@
 		<label>Validate:<input name="query" type="text"></input></label>
 		<input type="submit" value="search"></input>
 	</form>
+	</div>
 {% endautoescape %}
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.js"></script>

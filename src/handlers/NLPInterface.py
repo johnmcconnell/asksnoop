@@ -15,5 +15,5 @@ class Handler(webapp2.RequestHandler):
 	self.response.headers['Content-Type'] = 'text/html'
 	template = JINJA_ENVIRONMENT.get_template('nlp.jinja')
 	sentence = self.request.get('sentence')
-	phrase = lapi.noun_phrase(sentence)
-	self.response.write(template.render({'sentence':sentence,'phrase':phrase}))
+	phrases = lapi.noun_phrases(sentence)
+	self.response.write(template.render({'sentence':sentence,'phrases':phrases}))
